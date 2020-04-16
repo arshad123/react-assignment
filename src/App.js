@@ -1,25 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import { ToastContainer } from "react-toastify";
+import LoginForm from "./components/LoginForm";
+import RegisterForm from './components/RegisterForm';
+import NavBar from './components/NavBar';
+import NotFound from './components/NotFound';
+import "react-toastify/dist/ReactToastify.css";
+import Home from './components/Home';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <ToastContainer />
+      <NavBar />
+      <div className="container">
+        <Switch>
+          <Route path="/" component={LoginForm} exact />
+          <Route path="/register" component={RegisterForm} />
+          <Route path="/update" component={RegisterForm} />
+          <Route path="/home" component={Home} />
+          <Route path="/not-found" component={NotFound} />
+          <Redirect to="/not-found" />
+        </Switch>
+      </div>
+    </React.Fragment>
   );
 }
 
